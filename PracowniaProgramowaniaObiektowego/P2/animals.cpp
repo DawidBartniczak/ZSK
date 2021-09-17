@@ -3,43 +3,89 @@ using namespace std;
 
 class Animal {
 	public:
-		string species;
-		string animalKingdom;
-		string name;
-		char gender;
+		string species, animalKingdom, name, gender;
+		bool hasFur, eatsMeat, isDangerous;
 		unsigned short int birthYear;
 		float weight;
-		bool hasFur;
-		bool eatsMeat;
-		bool isDangerous;
 		
 		void pet();
 		void feed();
+		void kill(Animal target);
 };
 
 void Animal::pet() {
 	if (!isDangerous) {
-		cout << "Uda³o siê oswoiæ.";
+		cout << "UdaÅ‚o siÄ™ oswoiÄ‡." << endl;
 	} else {
-		cout << "Nie uda³o siê oswoiæ. Ps: Jesteœ martwy.";
+		cout << "Nie udaÅ‚o siÄ™ oswoiÄ‡." << endl;
 	}
 }
 
 void Animal::feed() {
 	if (eatsMeat) {
-		cout << "*zjada miêso*";
+		cout << "*zjada miÄ™so*" << endl;
 	} else {
-		cout << "*zjada liœcia*";
+		cout << "*zjada liÅ›cia*" << endl;
+	}
+}
+
+void Animal::kill(Animal target) {
+	if (isDangerous && target.isDangerous) {
+		cout << "Oboje zgineli ;(" << endl;
+	} else if (!isDangerous && !target.isDangerous) {
+		cout << "Doszli do porozimienia i zostali psiapsi." << endl;
+	} else {
+		if (isDangerous) {
+			cout << name << " wygraÅ‚!";
+		} else {
+			cout << target.name << " wygraÅ‚!";
+		}
 	}
 }
 
 int main() {
+	setlocale(LC_CTYPE, "Polish");
+	
 	Animal bob;
+	Animal leo;
 	
-//	bob.species = "Cat";
-//	bob.animalKingdom = "Mammal";
-//	bob.name = "Bob";
-//	bob.gender = 'M';
+	bob.species = "Cat";
+	bob.animalKingdom = "Mammal";
+	bob.name = "Bob";
+	bob.gender = "NB";
+	bob.birthYear = 2019;
+	bob.weight = 5.25;
+	bob.hasFur = true;
+	bob.eatsMeat = false;
+	bob.isDangerous = false;
 	
+	leo.species = "Cat";
+	leo.animalKingdom = "Mammal";
+	leo.name = "Leo";
+	leo.gender = "M";
+	leo.birthYear = 2017;
+	leo.weight = 12;
+	leo.hasFur = true;
+	leo.eatsMeat = false;
+	leo.isDangerous = false;
+	
+	while (true) {
+		string q;
+		
+		cout << "JakÄ… akcjÄ™ chcesz wykonaÄ‡?" << endl << ">";
+		
+		cin >> q;
+		
+		if (q=="pet"){
+			bob.pet();
+		} else if (q=="feed"){
+			bob.feed();
+		} else if (q=="kill"){
+			bob.kill(leo);
+		} else {
+			cout << "Bob nie zna takiej komendy!!" << endl;
+		}
+	}
+
 	return 0;
 }
