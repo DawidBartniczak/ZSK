@@ -11,6 +11,8 @@ class Animal {
 		void pet();
 		void feed();
 		void kill(Animal target);
+		
+		void printStats();
 };
 
 void Animal::pet() {
@@ -43,6 +45,17 @@ void Animal::kill(Animal target) {
 	}
 }
 
+void Animal::printStats() {
+	cout 	<< "--- " << name << " ---" << endl
+			<< "Gatunek: " << species << endl
+			<< "Królestwo: " << animalKingdom << endl
+			<< "Płeć: " << gender << endl
+			<< "Rok urodzenia: " << birthYear << endl
+			<< "Ma futro: " << hasFur << endl
+			<< "Je mięso: " << eatsMeat << endl
+			<< "Jest niebezpieczny: " << isDangerous << endl;
+}
+
 int main() {
 	setlocale(LC_CTYPE, "Polish");
 	
@@ -69,6 +82,11 @@ int main() {
 	leo.eatsMeat = false;
 	leo.isDangerous = false;
 	
+	bob.printStats();
+	cout << endl;
+	leo.printStats();
+	cout << endl;
+	
 	while (true) {
 		string q;
 		
@@ -85,6 +103,8 @@ int main() {
 		} else {
 			cout << "Bob nie zna takiej komendy!!" << endl;
 		}
+		
+		cout << endl;
 	}
 
 	return 0;
